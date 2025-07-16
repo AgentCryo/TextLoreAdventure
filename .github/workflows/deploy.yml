@@ -20,7 +20,7 @@ jobs:
 
       - name: Publish Blazor WebAssembly App
         run: |
-          dotnet publish TextLoreAdventure/TextLoreAdventure.csproj -c Release -o release
+          dotnet publish TextLoreAdventure.csproj -c Release -o release
 
       - name: Add .nojekyll
         run: touch release/wwwroot/.nojekyll
