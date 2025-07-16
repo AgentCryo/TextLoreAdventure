@@ -1,31 +1,21 @@
-name: Build and Deploy Blazor WebAssembly to GitHub Pages
+name: Deploy Blazor to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    name: Build and Deploy
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
-
-      - name: Publish Blazor WebAssembly App
-        run: dotnet publish TextLoreAdventure.csproj -c Release -o release
+      - uses: actions/checkout@v4
 
       - name: Add .nojekyll
-        run: touch release/wwwroot/.nojekyll
+        run: touch TextLoreAdventure/wwwroot/.nojekyll
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: release/wwwroot
+          publish_dir: ./TextLoreAdventure/wwwroot
