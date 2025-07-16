@@ -8,14 +8,23 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Add .nojekyll
-        run: touch TextLoreAdventure/wwwroot/.nojekyll
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
 
-      - name: Deploy
+      - name: Publish the app
+        run: dotnet publish TextLoreAdventure.csproj -c Release
+
+      - name: Add .nojekyll
+        run: touch TextLoreAdventure/bin/Release/net8.0/publish/wwwroot/.nojekyll
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./TextLoreAdventure/wwwroot
+          publish_dir: TextLoreAdventure/bin/Release/net8.0/publish/wwwroot
