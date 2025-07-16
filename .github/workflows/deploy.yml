@@ -17,14 +17,19 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Publish the app
-        run: dotnet publish TextLoreAdventure.csproj -c Release
+      - name: Publish Blazor WebAssembly
+        run: |
+          dotnet restore
+          dotnet publish TextLoreAdventure.csproj -c Release -o release
 
-      - name: Add .nojekyll
-        run: touch TextLoreAdventure/bin/Release/net8.0/publish/wwwroot/.nojekyll
+      - name: Check publish output
+        run: ls -R release
+
+      - name: Add .nojekyll file
+        run: touch release/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: TextLoreAdventure/bin/Release/net8.0/publish/wwwroot
+          publish_dir: release
