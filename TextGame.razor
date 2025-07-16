@@ -1,0 +1,153 @@
+@using Microsoft.AspNetCore.Components.Web
+@using System.Net.Http
+@using TextLoreAdventure.Data
+@inject HttpClient Http
+@implements IDisposable
+
+<div class="screen" tabindex="0" @onkeydown="OnKeyDown" @ref="screenDiv" style="outline:none;">
+    @foreach (var line in lines)
+    {
+        <div class="line @(line.SendByPlayer ? "player-line" : "npc-line")" style="color:@line.GetCssColor(); font-size:@line.FontSizePxpx; padding-bottom:@line.PaddingBelowPxpx;">
+            @line.Text
+        </div>
+    }
+    &gt; @currentInput<span class="cursor">@cursorChar</span>
+</div>
+
+@code {
+    private ElementReference screenDiv;
+
+    public GameState gameState = GameState.MainMenu;
+
+    List<Line> lines = new();
+    string currentInput = "";
+
+    bool cursorVisible = true;
+    string cursorChar => cursorVisible ? "_" : " ";
+
+    System.Threading.Timer? blinkTimer;
+    System.Threading.Timer? typingTimer;
+
+    MainMenu mainMenu = new();
+    Game game = new();
+
+    protected override void OnInitialized()
+    {
+        mainMenu.Start(lines);
+        SetupCursorBlink();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await screenDiv.FocusAsync();
+        }
+    }
+
+    void SetupCursorBlink()
+    {
+        blinkTimer = new System.Threading.Timer(_ =>
+        {
+            cursorVisible = !cursorVisible;
+            InvokeAsync(StateHasChanged);
+        }, null, Timeout.Infinite, 500);
+
+        typingTimer = new System.Threading.Timer(_ =>
+        {
+            blinkTimer?.Change(0, 500);
+        }, null, Timeout.Infinite, Timeout.Infinite);
+
+        blinkTimer.Change(0, 500);
+    }
+
+    void ResetCursorBlink()
+    {
+        cursorVisible = true;
+        blinkTimer?.Change(Timeout.Infinite, Timeout.Infinite);
+        typingTimer?.Change(1000, Timeout.Infinite);
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        blinkTimer?.Dispose();
+        typingTimer?.Dispose();
+    }
+
+    async void OnKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key is "Shift" or "ShiftLeft" or "ShiftRight")
+            return;
+
+        if (e.Key == "Backspace")
+        {
+            if (currentInput.Length > 0)
+                currentInput = currentInput[..^1];
+        }
+        else if (e.Key == "Enter")
+        {
+            if (!string.IsNullOrWhiteSpace(currentInput))
+            {
+                lines.Add(new Line(currentInput, 40, Color.DarkGreen, 0, true));
+                await ProcessInputAsync(currentInput);
+                currentInput = "";
+            }
+        }
+        else if (e.Key.Length == 1)
+        {
+            currentInput += MapKeyToChar(e);
+        }
+
+        ResetCursorBlink();
+        StateHasChanged();
+    }
+
+    async Task ProcessInputAsync(string input)
+    {
+        switch (gameState)
+        {
+            case GameState.MainMenu:
+                gameState = await mainMenu.ExecuteInputAsync(Http, input, lines, gameState, game);
+                break;
+            case GameState.Game:
+                await game.ExecuteInputAsync(Http, input, lines, gameState);
+                break;
+        }
+    }
+
+    char MapKeyToChar(KeyboardEventArgs e)
+    {
+        bool shift = e.ShiftKey;
+        var key = e.Key;
+
+        if (key.Length == 1 && char.IsLetter(key[0]))
+            return shift ? char.ToUpper(key[0]) : char.ToLower(key[0]);
+
+        return key switch
+        {
+            "0" => shift ? ')' : '0',
+            "1" => shift ? '!' : '1',
+            "2" => shift ? '@' : '2',
+            "3" => shift ? '#' : '3',
+            "4" => shift ? '$' : '4',
+            "5" => shift ? '%' : '5',
+            "6" => shift ? '^' : '6',
+            "7" => shift ? '&' : '7',
+            "8" => shift ? '*' : '8',
+            "9" => shift ? '(' : '9',
+            " " => ' ',
+            "." => shift ? '>' : '.',
+            "," => shift ? '<' : ',',
+            ";" => shift ? ':' : ';',
+            "'" => shift ? '"' : '\'',
+            "/" => shift ? '?' : '/',
+            "\\" => shift ? '|' : '\\',
+            "[" => shift ? '{' : '[',
+            "]" => shift ? '}' : ']',
+            "-" => shift ? '_' : '-',
+            "=" => shift ? '+' : '=',
+            _ => '\0',
+        };
+    }
+}

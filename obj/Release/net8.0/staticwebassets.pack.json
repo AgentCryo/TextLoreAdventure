@@ -1,0 +1,69 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\chill\\source\\repos\\TextLoreAdventure\\bin\\Release\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\chill\\source\\repos\\TextLoreAdventure\\obj\\Release\\net8.0\\compressed\\x77cea3w6l.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "C:\\Users\\chill\\source\\repos\\TextLoreAdventure\\wwwroot\\Assets\\Fonts\\consola.ttf",
+      "PackagePath": "staticwebassets\\Assets\\Fonts\\consola.ttf"
+    },
+    {
+      "Id": "C:\\Users\\chill\\source\\repos\\TextLoreAdventure\\wwwroot\\Assets\\Scenes\\Story\\LightRoom.json",
+      "PackagePath": "staticwebassets\\Assets\\Scenes\\Story\\LightRoom.json"
+    },
+    {
+      "Id": "C:\\Users\\chill\\source\\repos\\TextLoreAdventure\\wwwroot\\Assets\\Scenes\\Story\\Test.json",
+      "PackagePath": "staticwebassets\\Assets\\Scenes\\Story\\Test.json"
+    },
+    {
+      "Id": "C:\\Users\\chill\\source\\repos\\TextLoreAdventure\\wwwroot\\Assets\\Scenes\\Story\\WaterCavern.json",
+      "PackagePath": "staticwebassets\\Assets\\Scenes\\Story\\WaterCavern.json"
+    },
+    {
+      "Id": "C:\\Users\\chill\\source\\repos\\TextLoreAdventure\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\chill\\source\\repos\\TextLoreAdventure\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\chill\\source\\repos\\TextLoreAdventure\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\chill\\source\\repos\\TextLoreAdventure\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\chill\\source\\repos\\TextLoreAdventure\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "C:\\Users\\chill\\source\\repos\\TextLoreAdventure\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.TextLoreAdventure.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.build.TextLoreAdventure.props",
+      "PackagePath": "build\\TextLoreAdventure.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.TextLoreAdventure.props",
+      "PackagePath": "buildMultiTargeting\\TextLoreAdventure.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.TextLoreAdventure.props",
+      "PackagePath": "buildTransitive\\TextLoreAdventure.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

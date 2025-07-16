@@ -1,0 +1,1 @@
+C:\Users\chill\source\repos\TextLoreAdventure\bin\Release\net8.0\publish\web.config
