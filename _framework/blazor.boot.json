@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "TextLoreAdventure",
   "resources": {
-    "hash": "sha256-C0iBfOYA6S8f/287IkhXOxIZHlbJeFIC588PRiMPokE=",
+    "hash": "sha256-pSZgaIuB4NnRUG2KNZQMxa3E68A3k5QJrac4Ck+KOWc=",
     "jsModuleNative": {
       "dotnet.native.8.0.18.td341apd3g.js": "sha256-1QpKPnxEuRCElzcp+e3MrovJeAJkuzqKmRQay/6Aa08="
     },
@@ -46,7 +46,7 @@
       "System.Runtime.wasm": "sha256-BDgFW8m1dfWxpE6nT+7tVOOagE8eHWTJ7LvNo3+9PTw=",
       "System.Text.Encodings.Web.wasm": "sha256-34EMEYWmGSXMjP77kr42iOtcp0h+JkGWEBAbWIoCYJA=",
       "System.Text.Json.wasm": "sha256-T1KWy/YJDJGattAkTNeeFOCah0F5Nk5Ge9Aonbi+k4U=",
-      "TextLoreAdventure.wasm": "sha256-9+X/05GOHtrZEQaLs48UzrGFIJyYnlz4nJnifEmJXVk="
+      "TextLoreAdventure.wasm": "sha256-07PbkaZy5SYjaLIDSs906qs4IhJ5Y3NPVmxySNBoVss="
     }
   },
   "cacheBootResources": true,
