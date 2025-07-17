@@ -22,10 +22,15 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Publish Blazor WebAssembly app
-        run: dotnet publish ./TextLoreAdventure.csproj -c Release
+        run: dotnet publish TextLoreAdventure.csproj -c Release
+
+      - name: Ensure publish output exists
+        run: ls -la TextLoreAdventure/bin/Release/net8.0/publish/wwwroot
 
       - name: Add .nojekyll to disable Jekyll on GitHub Pages
-        run: touch TextLoreAdventure/bin/Release/net8.0/publish/wwwroot/.nojekyll
+        run: |
+          mkdir -p TextLoreAdventure/bin/Release/net8.0/publish/wwwroot
+          touch TextLoreAdventure/bin/Release/net8.0/publish/wwwroot/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
